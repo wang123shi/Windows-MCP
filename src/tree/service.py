@@ -389,9 +389,17 @@ class Tree:
         interactive_nodes.extend(dom_interactive_nodes)
         return (interactive_nodes,scrollable_nodes)
 
-    def annotated_screenshot(self, nodes: list[TreeElementNode]) -> Image.Image:
+    def get_annotated_screenshot(self, nodes: list[TreeElementNode],scale:float=1.0) -> Image.Image:
         screenshot = self.desktop.get_screenshot()
         sleep(0.10)
+        
+        original_width = screenshot.width
+        original_height = screenshot.height
+
+        scaled_width = int(original_width * scale)
+        scaled_height = int(original_height * scale)
+        screenshot = screenshot.resize((scaled_width, scaled_height), Image.Resampling.LANCZOS)
+        
         # Add padding
         padding = 5
         width = int(screenshot.width + (1.5 * padding))
@@ -413,12 +421,12 @@ class Tree:
             box = node.bounding_box
             color = get_random_color()
 
-            # Scale and pad the bounding box also clip the bounding box
+            # Scale and pad the bounding box coordinates
             adjusted_box = (
-                int(box.left) + padding,
-                int(box.top) + padding,
-                int(box.right) + padding,
-                int(box.bottom) + padding
+                int(box.left * scale) + padding,
+                int(box.top * scale) + padding,
+                int(box.right * scale) + padding,
+                int(box.bottom * scale) + padding
             )
             # Draw bounding box
             draw.rectangle(adjusted_box, outline=color, width=2)

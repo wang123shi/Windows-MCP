@@ -19,6 +19,7 @@ cursor=SystemCursor()
 watch_cursor=WatchCursor()
 windows_version=desktop.get_windows_version()
 default_language=desktop.get_default_language()
+screen_width,screen_height=desktop.get_resolution()
 
 instructions=dedent(f'''
 Windows MCP server provides tools to interact directly with the {windows_version} desktop, 
@@ -76,7 +77,7 @@ def powershell_tool(command: str) -> str:
     )
     )
 def state_tool(use_vision:bool=False):
-    desktop_state=desktop.get_state(use_vision=use_vision,as_bytes=True)
+    desktop_state=desktop.get_state(use_vision=use_vision,as_bytes=True,scale=0.7 if screen_height>1080 else 1.0)
     interactive_elements=desktop_state.tree_state.interactive_elements_to_string()
     scrollable_elements=desktop_state.tree_state.scrollable_elements_to_string()
     apps=desktop_state.apps_to_string()
