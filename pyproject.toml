@@ -1,6 +1,6 @@
 [project]
 name = "windows-mcp"
-version = "0.5.0"
+version = "0.5.3"
 description = "Lightweight MCP Server for interacting with Windows Operating System."
 authors = [
     { name = "Jeomon George", email = "jeogeoalukka@gmail.com" }
@@ -31,11 +31,10 @@ dependencies = [
 ]
 
 [project.scripts]
-windows-mcp = "main:main"
+windows-mcp = "windows_mcp.__main__:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.hatch.build]
-packages = ["src","main.py"]
+

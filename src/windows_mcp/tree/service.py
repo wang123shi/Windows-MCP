@@ -1,11 +1,11 @@
-from src.tree.config import INTERACTIVE_CONTROL_TYPE_NAMES,DOCUMENT_CONTROL_TYPE_NAMES,INFORMATIVE_CONTROL_TYPE_NAMES, DEFAULT_ACTIONS, THREAD_MAX_RETRIES
+from windows_mcp.tree.config import INTERACTIVE_CONTROL_TYPE_NAMES,DOCUMENT_CONTROL_TYPE_NAMES,INFORMATIVE_CONTROL_TYPE_NAMES, DEFAULT_ACTIONS, THREAD_MAX_RETRIES
 from uiautomation import Control,ImageControl,ScrollPattern,WindowControl,Rect,GetRootControl,PatternId
-from src.tree.views import TreeElementNode, ScrollElementNode, TextElementNode, Center, BoundingBox, TreeState
+from windows_mcp.tree.views import TreeElementNode, ScrollElementNode, TextElementNode, Center, BoundingBox, TreeState
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from src.tree.utils import random_point_within_bounding_box
+from windows_mcp.tree.utils import random_point_within_bounding_box
 from PIL import Image, ImageFont, ImageDraw
 from typing import TYPE_CHECKING,Optional
-from src.desktop.views import App
+from windows_mcp.desktop.views import App
 from time import sleep
 import logging
 import random
@@ -18,7 +18,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 if TYPE_CHECKING:
-    from src.desktop.service import Desktop
+    from windows_mcp.desktop.service import Desktop
     
 class Tree:
     def __init__(self,desktop:'Desktop'):

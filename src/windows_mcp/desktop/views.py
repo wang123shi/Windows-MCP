@@ -1,4 +1,4 @@
-from src.tree.views import TreeState
+from windows_mcp.tree.views import TreeState
 from dataclasses import dataclass
 from tabulate import tabulate
 from typing import Optional
