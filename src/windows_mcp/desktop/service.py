@@ -172,7 +172,7 @@ class Desktop:
                 sleep(1.25)
                 if status!=0:
                     return response
-                consecutive_waits=3
+                consecutive_waits=10
                 for _ in range(consecutive_waits):
                     if not self.is_app_running(name):
                         sleep(1.25)
@@ -200,11 +200,12 @@ class Desktop:
         app_name,_=matched_app
         appid=apps_map.get(app_name)
         if appid is None:
-            return (name,f'{name.title()} not found in start menu.',1)
-        if name.endswith('.exe'):
-            response,status=self.execute_command(f'Start-Process {appid}')
+            return (f'{name.title()} not found in start menu.',1)
+        if appid.endswith('.exe'):
+            command=f"Start-Process '{appid}'"
         else:
-            response,status=self.execute_command(f'Start-Process shell:AppsFolder\\{appid}')
+            command=f"Start-Process shell:AppsFolder\\{appid}"
+        response,status=self.execute_command(command)
         return response,status
     
     def switch_app(self,name:str):
